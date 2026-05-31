@@ -1,27 +1,18 @@
 package manager;
 
 import java.util.Scanner;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.InputMismatchException;
 
 import models.Vehicle;
 
 public class VehicleManager {
     private Scanner scanner;
-    ArrayList<Vehicle> vehicles = new ArrayList<>();
+    HashMap<Integer, Vehicle> vehicles = new HashMap<>();
 
-    public VehicleManager(ArrayList<Vehicle> vehicles, Scanner scanner) {
+    public VehicleManager(HashMap<Integer, Vehicle> vehicles, Scanner scanner) {
         this.vehicles = vehicles;
         this.scanner = scanner;
-    }
-
-    private Vehicle findVehicleById(int id) {
-        for (Vehicle vehicle : vehicles) {
-            if (vehicle.getID() == id) {
-                return vehicle;
-            }
-        }
-        return null;
     }
 
     public void rentVeh() {
@@ -30,7 +21,7 @@ public class VehicleManager {
             System.out.print("\nEnter vehicle id to rent: ");
             id = scanner.nextInt();
             scanner.nextLine();
-            Vehicle vehicle = findVehicleById(id);
+            Vehicle vehicle = vehicles.get(id);
             if (vehicle == null) {
                 System.out.println("Vehicle not found");
                 return;
@@ -49,7 +40,7 @@ public class VehicleManager {
             System.out.print("\nEnter vehicle id to return: ");
             id = scanner.nextInt();
             scanner.nextLine();
-            Vehicle vehicle = findVehicleById(id);
+            Vehicle vehicle = vehicles.get(id);
             if (vehicle == null) {
                 System.out.println("Vehicle not found recheck your vehicle code!");
                 return;
@@ -74,7 +65,7 @@ public class VehicleManager {
             System.out.print("\nEnter vehicle id: ");
             id = scanner.nextInt();
             scanner.nextLine();
-            Vehicle vehicle = findVehicleById(id);
+            Vehicle vehicle = vehicles.get(id);
             if (vehicle == null) {
                 System.out.println("Vehicle not found recheck your vehicle code!");
                 return;
